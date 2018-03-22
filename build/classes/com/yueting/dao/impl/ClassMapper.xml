@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.yueting.dao.ClassDao">
+		<select id="getByName" parameterType="java.util.Map" resultType="Class">
+			SELECT * FROM Class WHERE classname LIKE '%' #{classname} '%' LIMIT #{pageindex},#{pagesize}
+		</select>
+		<update id="updateById" parameterType="Class">
+			UPDATE class c SET c.classname=#{classname},c.classadreass=#{classadreass},c.starttime=#{starttime},c.eddtime=#{eddtime} WHERE c.id=#{id}
+		</update>
+		<delete id="deleteById" parameterType="int">
+			DELETE FROM Class WHERE id = #{id}
+		</delete>
+		<select id="getById" parameterType="int" resultType="Class">
+			SELECT * FROM Class WHERE id = #{id}
+		</select>
+		<insert id="addClass" parameterType="Class">
+			INSERT Class(classname,classadreass,starttime,eddtime) VALUE(#{classname},#{classadreass},#{starttime},#{eddtime})
+		</insert>
+		<select id="getCountClass" resultType="int">
+			SELECT COUNT(*) FROM class c
+		</select>
+		<select id="getAllClass" parameterType="java.util.Map" resultType="Class">
+			SELECT * FROM class LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="getAll" resultType="Class">
+			SELECT * FROM Class
+		</select>
+	</mapper>
+	
+	
+	

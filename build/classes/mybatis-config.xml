@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+ 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.yueting.model.Users" alias="Users"/>
+		<typeAlias type="com.yueting.model.Student" alias="Student"/>
+		<typeAlias type="com.yueting.model.Jiuye" alias="Jiuye"/>
+		<typeAlias type="com.yueting.model.Company" alias="Company"/>
+		<typeAlias type="com.yueting.model.Class" alias="Class"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/yueting/dao/impl/UserMapper.xml"/>
+		<mapper resource="com/yueting/dao/impl/StudentMapper.xml"/>
+		<mapper resource="com/yueting/dao/impl/JiuyeMapper.xml"/>
+		<mapper resource="com/yueting/dao/impl/CompanyMapper.xml"/>
+		<mapper resource="com/yueting/dao/impl/ClassMapper.xml"/>
+	</mappers>
+</configuration>
+
+
+
+
+

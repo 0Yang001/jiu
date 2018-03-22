@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.yueting.dao.StudentDao">
+		<select id="getStudentById" parameterType="int" resultType="Student">
+			SELECT * FROM Student WHERE id = #{id}
+		</select>
+		<select id="getStudentByName" parameterType="java.util.Map" resultType="Student">
+			SELECT * FROM Student WHERE name LIKE '%'#{name}'%' LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="getByClassid" parameterType="java.util.Map" resultType="Student">
+			SELECT * FROM Student WHERE classid = #{classid} LIMIT #{pageindex},#{pagesize}
+		</select>
+		<insert id="addStudent" parameterType="Student">
+			INSERT student(account,NAME,sex,school,major,graduate,psw,tel,qq,classid) VALUE(#{account},#{name},#{sex},#{school},#{major},#{graduate},#{psw},#{tel},#{qq},#{classid})
+		</insert>
+		<delete id="deleteStudent" parameterType="int">
+			DELETE FROM student WHERE id = #{id}
+		</delete>
+		<update id="updateStudent" parameterType="Student">
+			UPDATE student s SET s.account = #{account},s.NAME=#{name},s.sex=#{sex},s.school=#{school},s.major=#{major},s.graduate=#{graduate},s.tel=#{tel},s.qq=#{qq},s.classid=#{classid} WHERE s.id=#{id}
+		</update>
+		<delete id="deleteStudentByClassId" parameterType="int">
+			DELETE FROM student WHERE classid = #{classid}
+		</delete>
+		<select id="getCountStudent" resultType="int">
+			SELECT COUNT(*) FROM student
+		</select>
+		<select id="getStudentAll" parameterType="java.util.Map" resultType="Student">
+			SELECT * FROM Student LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="getSidByClassid" parameterType="int" resultType="int">
+			SELECT s.id FROM student s WHERE  classid = #{classid}
+		</select>
+	</mapper>
+	
+	
+	

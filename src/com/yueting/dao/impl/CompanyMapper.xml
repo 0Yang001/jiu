@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.yueting.dao.CompanyDao">
+		<insert id="addCom" parameterType="Company">
+			INSERT company(comname,jianjie,xuqiu,address,jitime,endtime,zhuangtai) VALUE(#{comname},#{jianjie},#{xuqiu},#{address},#{jitime},#{endtime},#{zhuangtai})
+		</insert>
+		<select id="searchComByName" parameterType="java.util.Map" resultType="Company">
+			SELECT * FROM Company WHERE comname LIKE '%'#{comname}'%' LIMIT #{pageindex},#{pagesize}
+		</select>
+		<update id="updataComByid" parameterType="Company">
+			UPDATE company c SET c.comname=#{comname},c.jianjie=#{jianjie},c.xuqiu=#{xuqiu},c.address=#{address},c.jitime=#{jitime},c.endtime=#{endtime},c.zhuangtai=#{zhuangtai} where c.id = #{id}
+		</update>
+		<delete id="deleteComByid" parameterType="int">
+			DELETE FROM Company WHERE id = #{id}		
+		</delete>
+		<select id="getComByend" parameterType="java.util.Map" resultType="Company">
+			SELECT * FROM company c WHERE c.endtime <![CDATA[>]]> NOW() LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="getComById" parameterType="int" resultType="Company">
+			SELECT * FROM Company WHERE id = #{id}
+		</select>
+		<select id="getComByhold" parameterType="java.util.Map" resultType="Company">
+			SELECT * FROM company c WHERE c.endtime <![CDATA[<]]> NOW() LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="getAllCompa" parameterType="java.util.Map" resultType="Company">
+			SELECT * FROM company LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="getAllByZhuang" parameterType="java.util.Map" resultType="Company">
+			SELECT * FROM company where zhuangtai = #{zhuangtai}  LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="getAllByJihua" parameterType="java.util.Map"  resultType="Company">
+			SELECT * FROM company c ORDER BY c.jitime DESC LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="getAllByShiji" parameterType="java.util.Map"  resultType="Company">
+			SELECT * FROM company c ORDER BY c.endtime DESC LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="getCountComp" resultType="int">
+			SELECT COUNT(*) FROM company c
+		</select>
+	</mapper>
+	
+	
+	

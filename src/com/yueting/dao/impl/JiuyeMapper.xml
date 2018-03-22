@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.yueting.dao.JiuyeDao">
+		<insert id="addJiuye" parameterType="Jiuye">
+			INSERT jiuye(salary,jiuyetime,sid,comid) VALUE(#{salary},#{jiuyetime},#{sid},#{comid})
+		</insert>
+		<select id="searchByClass" parameterType="int"  resultType="Jiuye">
+			SELECT s.account,s.NAME,s.sex,s.school,s.major,s.graduate,s.tel,c1.comname,c1.xuqiu,j.salary,j.jiuyetime FROM jiuye j INNER JOIN student s ON j.sid = s.id INNER JOIN class c ON s.classid = c.id INNER JOIN company c1 ON j.comid = c1.id WHERE c.classname=#{classname}
+		</select>
+		<delete id="deleteJiuye" parameterType="int">
+			delete from jiuye where comid =#{comid}
+		</delete>
+		<select id="getCountJiuye" resultType="int">
+			SELECT COUNT(*) FROM jiuye 
+		</select>
+		<select id="getAllJiuye" parameterType="java.util.Map" resultType="Jiuye">
+			SELECT * FROM jiuye INNER JOIN student s ON jiuye.sid = s.id INNER JOIN company c ON jiuye.comid = c.id limit #{pageindex},#{pagesize}
+		</select>
+		<select id="geyAllByClassId" parameterType="java.util.Map" resultType="Jiuye">
+			SELECT * FROM jiuye INNER JOIN student s ON jiuye.sid = s.id INNER JOIN company c ON jiuye.comid = c.id INNER JOIN class c1 ON s.classid = c1.id WHERE c1.id = #{id} limit #{pageindex},#{pagesize}
+		</select>
+		<delete id="deleteBySid" parameterType="int">
+			delete from jiuye where sid =#{sid}
+		</delete>
+	</mapper>
+	
+	
+	

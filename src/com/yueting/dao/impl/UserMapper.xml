@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.yueting.dao.UsersDao">
+		<select id="getUserById" parameterType="int" resultType="Users">
+			SELECT * FROM users WHERE id = #{id}
+		</select>
+		<select id="Login" parameterType="Users" resultType="Users">
+			SELECT * FROM users WHERE username =#{username} and psw =#{psw}
+		</select>
+		<insert id="register" parameterType="Users">
+			INSERT users(account,username,email,psw,role) VALUE(#{account},#{username},#{email},#{psw},#{role})
+		</insert>
+		<delete id="deleteUserById" parameterType="int">
+			DELETE FROM  users WHERE id=#{id}
+		</delete>
+		<select id="searchAll" parameterType="java.util.Map" resultType="Users">
+			SELECT * FROM users LIMIT #{pageindex},#{pagesize}
+		</select>
+		<select id="searchByName" parameterType="java.util.Map" resultType="Users">
+			SELECT * FROM users u WHERE u.username LIKE '%'#{username}'%' LIMIT #{pageindex},#{pagesize}
+		</select>
+		<update id="changePsw" parameterType="java.util.Map">
+			UPDATE users u SET u.psw= #{xpsw} WHERE psw = #{jpsw} and u.id = #{id}
+		</update>
+		<select id="getCountUser" resultType="int">
+			SELECT COUNT(*) FROM users
+		</select>
+		<insert id="addStudentUser" parameterType="Users">
+			INSERT users(account,username,email,psw,role) VALUE(#{account},#{username},#{email},#{psw},#{role})
+		</insert>
+	</mapper>
+	
+	
+	
